@@ -8,7 +8,7 @@ import (
 
 	"github.com/chuhongwei/BlogServer/dal/db"
 
-	"github.com/chuhongwei/BlogServerdal/model"
+	"github.com/chuhongwei/BlogServer/dal/model"
 )
 
 func main() {
