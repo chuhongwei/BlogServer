@@ -6,9 +6,9 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/BlogByFourMan/Server/dal/db"
+	"github.com/chuhongwei/BlogServer/dal/db"
 
-	"github.com/BlogByFourMan/Server/dal/model"
+	"github.com/chuhongwei/BlogServerdal/model"
 )
 
 func main() {

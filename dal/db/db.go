@@ -9,7 +9,7 @@ import (
 
 	"runtime"
 
-	"github.com/BlogByFourMan/Server/dal/model"
+	"github.com/chuhongwei/BlogServer/dal/model"
 	"github.com/boltdb/bolt"
 )
 

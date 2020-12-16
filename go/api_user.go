@@ -18,8 +18,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/BlogByFourMan/Server/dal/db"
-	"github.com/BlogByFourMan/Server/dal/model"
+	"github.com/chuhongwei/BlogServer/dal/db"
+	"github.com/chuhongwei/BlogServer/dal/model"
 	"github.com/dgrijalva/jwt-go"
 )
 
