@@ -19,7 +19,11 @@ func GetDBPATH() string {
 		pt, _ := os.Getwd()
 		return pt + "\\dal\\db\\Blog.db"
 	}
+<<<<<<< HEAD
 	return path.Join(os.Getenv("GOPATH"), "src/github.com/chuhongwei/BlogServer/dal/db/Blog.db")
+=======
+	return path.Join(os.Getenv("GOPATH"), "src", "github.com", "chuhongwei", "BlogServer", "dal", "db", "Blog.db")
+>>>>>>> 122f99ecae4f8e51d7daa1e7adc2f9ce6340342b
 }
 func Init() {
 	db, err := bolt.Open(GetDBPATH(), 0600, nil)
