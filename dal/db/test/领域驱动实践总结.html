@@ -1,0 +1,308 @@
+<div class="blog-content-box">
+    <div class="article-header-box">
+        <div class="article-header">
+            <div class="article-title-box">
+                <h1 class="title-article" id="articleContentId">领域驱动实践总结(基本理论总结与分析+架构分析与代码设计V+具体应用设计分析)</h1>
+            </div>
+            <div class="article-info-box">
+                <div class="article-bar-top">
+                    <div class="bar-content">
+                    <a class="follow-nickName " href="https://zyfcodes.blog.csdn.net" target="_blank" rel="noopener">张彦峰ZYF</a>
+                    <span class="time">2020-03-26 18:34:46</span>
+                    </a>
+                    </div>
+                </div>
+                <div class="up-time"><span>最后发布:2020-03-26 18:34:46</span><span>首次发布:2020-03-26 18:34:46</span></div>
+                <div class="slide-content-box">
+                    <div class="article-copyright">
+                        <div class="creativecommons">
+                            版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。
+                        </div>
+                        <div class="article-source-link">
+                            本文链接：<a href="https://blog.csdn.net/xiaofeng10330111/article/details/105124900" target="_blank">https://blog.csdn.net/xiaofeng10330111/article/details/105124900</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="operating">
+                    <a class="href-article-edit slide-toggle">版权</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-b5506197d8.css">
+                <div id="content_views" class="htmledit_views">
+                    <p id="main-toc"><strong>目录</strong></p> 
+<p id="%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93%E4%BA%8C%3A%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1-toc" style="margin-left:0px;"><a href="#%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93%E4%BA%8C%3A%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1">领域驱动实践总结二:架构分析与代码设计</a></p> 
+<p id="%E4%B8%80%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E6%8B%A9-toc" style="margin-left:0px;"><a href="#%E4%B8%80%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E6%8B%A9">一、微服务架构模型的对比与选择</a></p> 
+<p id="%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E6%B4%81%E6%9E%B6%E6%9E%84-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E6%B4%81%E6%9E%B6%E6%9E%84">&#xff08;一&#xff09;整洁架构</a></p> 
+<p id="%EF%BC%88%E4%BA%8C%EF%BC%89%E5%85%AD%E8%BE%B9%E5%BD%A2%E6%9E%B6%E6%9E%84-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%85%AD%E8%BE%B9%E5%BD%A2%E6%9E%B6%E6%9E%84">&#xff08;二&#xff09;六边形架构</a></p> 
+<p id="%EF%BC%88%E4%B8%89%EF%BC%89DDD%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%B8%89%EF%BC%89DDD%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84">&#xff08;三&#xff09;DDD 分层架构</a></p> 
+<p id="1.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82-toc" style="margin-left:80px;"><a href="#1.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82">1.用户接口层</a></p> 
+<p id="2.%E5%BA%94%E7%94%A8%E5%B1%82-toc" style="margin-left:80px;"><a href="#2.%E5%BA%94%E7%94%A8%E5%B1%82">2.应用层</a></p> 
+<p id="3.%E9%A2%86%E5%9F%9F%E5%B1%82-toc" style="margin-left:80px;"><a href="#3.%E9%A2%86%E5%9F%9F%E5%B1%82">3.领域层</a></p> 
+<p id="4.%E5%9F%BA%E7%A1%80%E5%B1%82-toc" style="margin-left:80px;"><a href="#4.%E5%9F%BA%E7%A1%80%E5%B1%82">4.基础层</a></p> 
+<p id="5.%E4%BB%8E%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E5%90%91%20DDD%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B-toc" style="margin-left:80px;"><a href="#5.%E4%BB%8E%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E5%90%91%20DDD%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B">5.从三层架构向 DDD 分层架构演进</a></p> 
+<p id="%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B8%89%E7%A7%8D%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%B9%E6%AF%94%E5%92%8C%E5%88%86%E6%9E%90-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B8%89%E7%A7%8D%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%B9%E6%AF%94%E5%92%8C%E5%88%86%E6%9E%90">&#xff08;四&#xff09;三种微服务架构模型的对比和分析</a></p> 
+<p id="%E4%BA%8C%E3%80%81%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B-toc" style="margin-left:0px;"><a href="#%E4%BA%8C%E3%80%81%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B">二、领域驱动设计分层架构与微服务代码模型</a></p> 
+<p id="%EF%BC%88%E4%B8%80%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%B8%80%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">&#xff08;一&#xff09;代码模型总目录结构</a></p> 
+<p id="1.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%80%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-toc" style="margin-left:80px;"><a href="#1.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%80%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">1.微服务一级目录结构</a></p> 
+<p id="2.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81-toc" style="margin-left:80px;"><a href="#2.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">2.用户接口层目录结构、职能和代码形态</a></p> 
+<p id="3.%E5%BA%94%E7%94%A8%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81-toc" style="margin-left:80px;"><a href="#3.%E5%BA%94%E7%94%A8%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">3.应用层目录结构、职能和代码形态</a></p> 
+<p id="4.%E9%A2%86%E5%9F%9F%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81-toc" style="margin-left:80px;"><a href="#4.%E9%A2%86%E5%9F%9F%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">4.领域层目录结构、职能和代码形态</a></p> 
+<p id="5.%E5%9F%BA%E7%A1%80%E5%B1%82%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81-toc" style="margin-left:80px;"><a href="#5.%E5%9F%BA%E7%A1%80%E5%B1%82%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">5.基础层层目录结构、职能和代码形态</a></p> 
+<p id="%EF%BC%88%E4%BA%8C%EF%BC%89%E5%BA%94%E7%94%A8%E5%B1%82%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%BA%94%E7%94%A8%E5%B1%82%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90">&#xff08;二&#xff09;应用层的领域对象分析</a></p> 
+<p id="1.%E5%AE%9E%E4%BD%93%E6%96%B9%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85-toc" style="margin-left:80px;"><a href="#1.%E5%AE%9E%E4%BD%93%E6%96%B9%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85">1.实体方法的封装</a></p> 
+<p id="2.%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%BB%84%E5%90%88%E5%92%8C%E5%B0%81%E8%A3%85-toc" style="margin-left:80px;"><a href="#2.%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%BB%84%E5%90%88%E5%92%8C%E5%B0%81%E8%A3%85">2.领域服务的组合和封装</a></p> 
+<p id="3.%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%BB%84%E5%90%88%E5%92%8C%E7%BC%96%E6%8E%92-toc" style="margin-left:80px;"><a href="#3.%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%BB%84%E5%90%88%E5%92%8C%E7%BC%96%E6%8E%92">3.应用服务的组合和编排</a></p> 
+<p id="%EF%BC%88%E4%B8%89%EF%BC%89%E9%A2%86%E5%9F%9F%E5%B1%82%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%B8%89%EF%BC%89%E9%A2%86%E5%9F%9F%E5%B1%82%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90">&#xff08;三&#xff09;领域层的领域对象分析</a></p> 
+<p id="1.%E8%AE%BE%E8%AE%A1%E5%AE%9E%E4%BD%93-toc" style="margin-left:80px;"><a href="#1.%E8%AE%BE%E8%AE%A1%E5%AE%9E%E4%BD%93">1.设计实体</a></p> 
+<p id="2.%E6%89%BE%E5%87%BA%E8%81%9A%E5%90%88%E6%A0%B9-toc" style="margin-left:80px;"><a href="#2.%E6%89%BE%E5%87%BA%E8%81%9A%E5%90%88%E6%A0%B9">2.找出聚合根</a></p> 
+<p id="3.%E8%AE%BE%E8%AE%A1%E5%80%BC%E5%AF%B9%E8%B1%A1-toc" style="margin-left:80px;"><a href="#3.%E8%AE%BE%E8%AE%A1%E5%80%BC%E5%AF%B9%E8%B1%A1">3.设计值对象</a></p> 
+<p id="4.%E8%AE%BE%E8%AE%A1%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6-toc" style="margin-left:80px;"><a href="#4.%E8%AE%BE%E8%AE%A1%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6">4.设计领域事件</a></p> 
+<p id="5.%E8%AE%BE%E8%AE%A1%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1-toc" style="margin-left:80px;"><a href="#5.%E8%AE%BE%E8%AE%A1%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1">5.设计领域服务</a></p> 
+<p id="6.%E8%AE%BE%E8%AE%A1%E4%BB%93%E5%82%A8-toc" style="margin-left:80px;"><a href="#6.%E8%AE%BE%E8%AE%A1%E4%BB%93%E5%82%A8">6.设计仓储</a></p> 
+<p id="%EF%BC%88%E5%9B%9B%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E5%BC%BA%E8%B0%83%E5%86%85%E5%AE%B9-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E5%BC%BA%E8%B0%83%E5%86%85%E5%AE%B9">&#xff08;四&#xff09;代码模型强调内容</a></p> 
+<p id="%E7%AC%AC%E4%B8%80%E7%82%B9%EF%BC%9A%E8%81%9A%E5%90%88%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BE%B9%E7%95%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E6%B8%85%E6%99%B0%E3%80%82-toc" style="margin-left:80px;"><a href="#%E7%AC%AC%E4%B8%80%E7%82%B9%EF%BC%9A%E8%81%9A%E5%90%88%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BE%B9%E7%95%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E6%B8%85%E6%99%B0%E3%80%82">第一点&#xff1a;聚合之间的代码边界一定要清晰。</a></p> 
+<p id="%E7%AC%AC%E4%BA%8C%E7%82%B9%EF%BC%9A%E4%BD%A0%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%89%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E7%9A%84%E6%A6%82%E5%BF%B5%E3%80%82-toc" style="margin-left:80px;"><a href="#%E7%AC%AC%E4%BA%8C%E7%82%B9%EF%BC%9A%E4%BD%A0%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%89%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E7%9A%84%E6%A6%82%E5%BF%B5%E3%80%82">第二点&#xff1a;你一定要有代码分层的概念。</a></p> 
+<p id="%E4%B8%89%E3%80%81%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%BE%B9%E7%95%8C-toc" style="margin-left:0px;"><a href="#%E4%B8%89%E3%80%81%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%BE%B9%E7%95%8C">三、正确理解微服务的边界</a></p> 
+<p id="%EF%BC%88%E4%B8%80%EF%BC%89%E9%80%BB%E8%BE%91%E8%BE%B9%E7%95%8C-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%B8%80%EF%BC%89%E9%80%BB%E8%BE%91%E8%BE%B9%E7%95%8C">&#xff08;一&#xff09;逻辑边界</a></p> 
+<p id="%EF%BC%88%E4%BA%8C%EF%BC%89%E7%89%A9%E7%90%86%E8%BE%B9%E7%95%8C-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E7%89%A9%E7%90%86%E8%BE%B9%E7%95%8C">&#xff08;二&#xff09;物理边界</a></p> 
+<p id="%EF%BC%88%E4%B8%89%EF%BC%89%E4%BB%A3%E7%A0%81%E8%BE%B9%E7%95%8C-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%B8%89%EF%BC%89%E4%BB%A3%E7%A0%81%E8%BE%B9%E7%95%8C">&#xff08;三&#xff09;代码边界</a></p> 
+<p id="%E5%9B%9B%E3%80%81%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%90%84%E5%B1%82%E7%9A%84%E5%8D%8F%E4%BD%9C-toc" style="margin-left:0px;"><a href="#%E5%9B%9B%E3%80%81%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%90%84%E5%B1%82%E7%9A%84%E5%8D%8F%E4%BD%9C">四、正确认识服务和数据在微服务各层的协作</a></p> 
+<p id="%EF%BC%88%E4%B8%80%EF%BC%89%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8D%8F%E4%BD%9C-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%B8%80%EF%BC%89%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8D%8F%E4%BD%9C">&#xff08;一&#xff09;正确认识服务的协作</a></p> 
+<p id="1.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%B1%BB%E5%9E%8B-toc" style="margin-left:80px;"><a href="#1.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%B1%BB%E5%9E%8B">1. 服务的类型</a></p> 
+<p id="2.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%B0%83%E7%94%A8%EF%BC%88%E4%B8%89%E7%B1%BB%E4%B8%BB%E8%A6%81%E5%9C%BA%E6%99%AF%EF%BC%89-toc" style="margin-left:80px;"><a href="#2.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%B0%83%E7%94%A8%EF%BC%88%E4%B8%89%E7%B1%BB%E4%B8%BB%E8%A6%81%E5%9C%BA%E6%99%AF%EF%BC%89">2. 服务的调用&#xff08;三类主要场景&#xff09;</a></p> 
+<p id="%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%86%85%E8%B7%A8%E5%B1%82%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8-toc" style="margin-left:80px;"><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%86%85%E8%B7%A8%E5%B1%82%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8">微服务内跨层服务调用</a></p> 
+<p id="%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8-toc" style="margin-left:80px;"><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8">微服务之间的服务调用</a></p> 
+<p id="%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8-toc" style="margin-left:80px;"><a href="#%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8">领域事件驱动</a></p> 
+<p id="3.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%84%E5%90%88-toc" style="margin-left:80px;"><a href="#3.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%84%E5%90%88">3. 服务的封装与组合</a></p> 
+<p id="%EF%BC%88%E4%BA%8C%EF%BC%89%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8D%8F%E4%BD%9C-toc" style="margin-left:40px;"><a href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8D%8F%E4%BD%9C">&#xff08;二&#xff09;正确认识服务数据的协作</a></p> 
+<p id="1.%E5%9F%BA%E7%A1%80%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C-toc" style="margin-left:80px;"><a href="#1.%E5%9F%BA%E7%A1%80%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">1.基础层数据协作</a></p> 
+<p id="2.%E9%A2%86%E5%9F%9F%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C-toc" style="margin-left:80px;"><a href="#2.%E9%A2%86%E5%9F%9F%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">2.领域层数据协作</a></p> 
+<p id="3.%E5%BA%94%E7%94%A8%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C-toc" style="margin-left:80px;"><a href="#3.%E5%BA%94%E7%94%A8%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">3.应用层数据协作</a></p> 
+<p id="4.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C-toc" style="margin-left:80px;"><a href="#4.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">4.用户接口层数据协作</a></p> 
+<p id="5.%E5%89%8D%E7%AB%AF%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C-toc" style="margin-left:80px;"><a href="#5.%E5%89%8D%E7%AB%AF%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">5.前端应用数据协作</a></p> 
+<p id="%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D%E3%80%81%E6%96%87%E7%8C%AE%E5%92%8C%E8%B5%84%E6%96%99-toc" style="margin-left:40px;"><a href="#%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D%E3%80%81%E6%96%87%E7%8C%AE%E5%92%8C%E8%B5%84%E6%96%99">参考书籍、文献和资料</a></p> 
+<hr id="hr-toc" />
+<h1 id="%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93%E4%BA%8C%3A%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1">领域驱动实践总结二:架构分析与代码设计</h1> 
+<p>领域驱动设计DDD是一种设计思想&#xff0c;它可以同时指导中台业务建模和微服务设计(<span style="color:#f33b45;">中台本质是业务模型&#xff0c;微服务是业务模型的系统落地</span>)&#xff0c;领域驱动设计强调领域模型和微服务设计的一体性&#xff0c;先有领域模型然后才有微服务&#xff0c;而不是脱离领域模型来谈微服务设计。</p> 
+<p>微服务<span style="color:#f33b45;">拆分困境产生的根本原因</span>:不知道业务或者微服务的边界到底在什么地方。</p> 
+<p>DDD <span style="color:#f33b45;">核心思想</span>:通过领域驱动设计方法定义领域模型&#xff0c;从而确定业务和应用边界&#xff0c;保证业务模型与代码模型的一致性。</p> 
+<p>对于领域驱动设计的学习做的总结主要写三篇博客&#xff0c;主要包括三部分:基本理论总结与分析、架构分析与代码设计、具体应用设计分析&#xff0c;主要参考的资料为极客时间的欧创新架构师的《DDD》实战&#xff0c;其他参考书籍在文章下方的参考书籍中。</p> 
+<p>本次主要总结DDD架构分析与代码设计&#xff1a;</p> 
+<h1 id="%E4%B8%80%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%B9%E6%AF%94%E4%B8%8E%E9%80%89%E6%8B%A9">一、微服务架构模型的对比与选择</h1> 
+<p>微服务架构模型现有的选择模型包括&#xff1a;整洁架构、CQRS 和六边形架构、DDD 分层架构等。</p> 
+<p>&#xff08;注&#xff1a;CQRS架构之前博客中有讲&#xff0c;本次不做分析&#xff09;</p> 
+<p>每种架构模式虽然提出的时代和背景不同&#xff0c;但其核心理念都是为了设计出“高内聚低耦合”的架构&#xff0c;轻松实现架构演进。</p> 
+<p>DDD 分层架构的思想使架构边界变得越来越清晰&#xff0c;它在微服务架构模型中&#xff0c;占有非常重要的位置。<span style="color:#f33b45;">建议选择DDD 分层架构</span>。</p> 
+<h2 id="%EF%BC%88%E4%B8%80%EF%BC%89%E6%95%B4%E6%B4%81%E6%9E%B6%E6%9E%84">&#xff08;一&#xff09;整洁架构</h2> 
+<p style="text-align:center;"><img alt="" height="336" src="https://img-blog.csdnimg.cn/20200331183940976.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="600" /></p> 
+<p>在整洁架构里&#xff0c;同心圆代表应用软件的不同部分&#xff0c;从里到外依次是领域模型、领域服务、应用服务和最外围的容易变化的内容&#xff0c;比如用户界面和基础设施。</p> 
+<p>整洁架构<span style="color:#f33b45;">最主要的原则是依赖原则</span>&#xff0c;它定义了各层的<span style="color:#f33b45;">依赖关系&#xff0c;越往里依赖越低&#xff0c;代码级别越高&#xff0c;越是核心能力</span>。外圆代码依赖只能指向内圆&#xff0c;内圆不需要知道外圆的任何情况。</p> 
+<h2 id="%EF%BC%88%E4%BA%8C%EF%BC%89%E5%85%AD%E8%BE%B9%E5%BD%A2%E6%9E%B6%E6%9E%84">&#xff08;二&#xff09;六边形架构</h2> 
+<p style="text-align:center;"><img alt="" height="401" src="https://img-blog.csdnimg.cn/20200331184655299.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="700" /></p> 
+<p>六边形架构的<span style="color:#f33b45;">核心理念</span>是&#xff1a;应用是通过端口与外部进行交互的。</p> 
+<p>也就是说&#xff0c;在下图的六边形架构中&#xff0c;<span style="color:#f33b45;">红圈内的核心业务逻辑&#xff08;应用程序和领域模型&#xff09;与外部资源&#xff08;包括 APP、Web 应用以及数据库资源等&#xff09;完全隔离&#xff0c;仅通过适配器进行交互</span>。它解决了业务逻辑与用户界面的代码交错问题&#xff0c;很好地实现了前后端分离。</p> 
+<p>六边形架构各层的依赖关系与整洁架构一样&#xff0c;都是由外向内依赖。</p> 
+<p>六边形架构的一个端口可能对应多个外部系统&#xff0c;不同的外部系统也可能会使用不同的适配器&#xff0c;由适配器负责协议转换。这就使得应用程序能够以一致的方式被用户、程序、自动化测试和批处理脚本使用。</p> 
+<h2 id="%EF%BC%88%E4%B8%89%EF%BC%89DDD%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84">&#xff08;三&#xff09;DDD 分层架构</h2> 
+<p>从上到下依次是&#xff1a;用户接口层、应用层、领域层和基础层。</p> 
+<p style="text-align:center;"><img alt="" height="452" src="https://img-blog.csdnimg.cn/20200331185421776.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="500" /></p> 
+<h3 id="1.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82">1.用户接口层</h3> 
+<p>用户接口层负责向用户显示信息和解释用户指令。</p> 
+<p>这里的用户可能是&#xff1a;用户、程序、自动化测试和批处理脚本等等。</p> 
+<h3 id="2.%E5%BA%94%E7%94%A8%E5%B1%82">2.应用层</h3> 
+<p>应用层是很薄的一层&#xff0c;<span style="color:#f33b45;">理论上不应该有业务规则或逻辑&#xff0c;主要面向用例和流程相关的操作</span>。</p> 
+<p><strong><span style="color:#f33b45;">位于领域层之上&#xff0c;领域层包含多个聚合&#xff0c;所以它可以协调多个聚合的服务和领域对象完成服务编排和组合&#xff0c;协作完成业务操作。</span></strong></p> 
+<p>应用层<span style="color:#f33b45;">也是微服务之间交互的通道</span>&#xff0c;它可以调用其它微服务的应用服务&#xff0c;完成微服务之间的服务组合和编排。</p> 
+<p><span style="color:#f33b45;"><strong>注意</strong></span>&#xff1a;</p> 
+<ul><li>在设计和开发时&#xff0c;不要将本该放在领域层的业务逻辑放到应用层中实现。因为庞大的应用层会使领域模型失焦&#xff0c;时间一长你的微服务就会演化为传统的三层架构&#xff0c;业务逻辑会变得混乱。</li><li>应用服务是在应用层的&#xff0c;它负责服务的组合、编排和转发&#xff0c;负责处理业务用例的执行顺序以及结果的拼装&#xff0c;以粗粒度的服务通过 API 网关向前端发布。</li><li>应用服务还可以进行安全认证、权限校验、事务控制、发送或订阅领域事件等。</li></ul>
+<h3 id="3.%E9%A2%86%E5%9F%9F%E5%B1%82">3.领域层</h3> 
+<p>领域层的作用是<strong><span style="color:#f33b45;">实现企业核心业务逻辑&#xff0c;通过各种校验手段保证业务的正确性</span></strong>。</p> 
+<p>领域层<span style="color:#f33b45;">主要体现领域模型的业务能力</span>&#xff0c;它用来表达业务概念、业务状态和业务规则。</p> 
+<p>领域层包含<span style="color:#f33b45;">聚合根、实体、值对象、领域服务等</span>领域模型中的领域对象。</p> 
+<p>注意&#xff1a;</p> 
+<ul><li>领域模型的业务逻辑主要是由实体和领域服务来实现的&#xff0c;其中实体会采用充血模型来实现所有与之相关的业务功能。</li><li>实体和领域服务在实现业务逻辑上不是同级的&#xff0c;当领域中的某些功能&#xff0c;单一实体&#xff08;或者值对象&#xff09;不能实现时&#xff0c;领域服务就会出马&#xff0c;它可以组合聚合内的多个实体&#xff08;或者值对象&#xff09;&#xff0c;实现复杂的业务逻辑。</li></ul>
+<h3 id="4.%E5%9F%BA%E7%A1%80%E5%B1%82">4.基础层</h3> 
+<p>基础层是<span style="color:#f33b45;">贯穿所有层</span>的&#xff0c;它的作用就是<span style="color:#f33b45;">为其它各层提供通用的技术和基础服务</span>&#xff0c;包括第三方工具、驱动、消息中间件、网关、文件、缓存以及数据库等。比较常见的功能还是提供数据库持久化。</p> 
+<p>基础层包含基础服务&#xff0c;它采用依赖倒置设计&#xff0c;<span style="color:#f33b45;">封装基础资源服务&#xff0c;实现应用层、领域层与基础层的解耦&#xff0c;降低外部资源变化对应用的影响。</span></p> 
+<h3 id="5.%E4%BB%8E%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84%E5%90%91%20DDD%20%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B">5.从三层架构向 DDD 分层架构演进</h3> 
+<p>DDD 分层架构中的要素其实和三层架构类似&#xff0c;只是在 DDD 分层架构中&#xff0c;这些要素被重新归类&#xff0c;重新划分了层&#xff0c;确定了层与层之间的交互规则和职责边界。</p> 
+<p style="text-align:center;"><img alt="" height="378" src="https://img-blog.csdnimg.cn/20200331190927998.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="500" /></p> 
+<ul><li>三层架构向 DDD 分层架构演进&#xff0c;主要<span style="color:#f33b45;">发生在业务逻辑层和数据访问层</span>。</li><li>DDD 分层架构在用户接口层<span style="color:#f33b45;">引入了 DTO</span>&#xff0c;给前端提供了更多的可使用数据和更高的展示灵活性。</li><li>DDD 分层架构对三层架构的<span style="color:#f33b45;">业务逻辑层进行了更清晰的划分</span>&#xff0c;改善了三层架构核心业务逻辑混乱&#xff0c;代码改动相互影响大的情况。</li><li>DDD 分层架构<span style="color:#f33b45;">将业务逻辑层的服务拆分到了应用层和领域层</span>。<span style="color:#f33b45;">应用层快速响应前端的变化</span>&#xff0c;<span style="color:#f33b45;">领域层实现领域模型的能力</span>。</li><li>在<span style="color:#f33b45;">数据访问层和基础层之间</span>&#xff1a;<span style="color:#f33b45;">三层架构数据访问采用 DAO 方式</span>&#xff1b;<span style="color:#f33b45;">DDD 分层架构</span>的数据库等基础资源访问&#xff0c;<span style="color:#f33b45;">采用了仓储&#xff08;Repository&#xff09;设计模式</span>&#xff0c;通过<span style="color:#f33b45;">依赖倒置实现各层对基础资源的解耦</span>。仓储又分为两部分&#xff1a;<span style="color:#f33b45;">仓储接口和仓储实现</span>。<span style="color:#86ca5e;">仓储接口放在领域层</span>中&#xff0c;<span style="color:#86ca5e;">仓储实现放在基础层</span>。原来三层架构通用的第三方工具包、驱动、Common、Utility、Config 等通用的公共的资源类统一放到了基础层。</li></ul>
+<h2 id="%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B8%89%E7%A7%8D%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%B9%E6%AF%94%E5%92%8C%E5%88%86%E6%9E%90">&#xff08;四&#xff09;三种微服务架构模型的对比和分析</h2> 
+<p style="text-align:center;"><img alt="" height="456" src="https://img-blog.csdnimg.cn/20200402100731259.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="600" /></p> 
+<ul><li><span style="color:#f33b45;">重点关注图中的红色线框</span>&#xff0c;它们是非常重要的分界线&#xff0c;这三种架构里面都有&#xff0c;它的作用就是将核心业务逻辑与外部应用、基础资源进行隔离。</li><li><span style="color:#f33b45;">红色框内部主要实现核心业务逻辑&#xff0c;划分了应用层和领域层</span>&#xff0c;来承担不同的业务逻辑。</li><li><span style="color:#f33b45;">领域层实现面向领域模型&#xff0c;实现领域模型的核心业务逻辑&#xff0c;属于原子模型</span>&#xff0c;它需要保持领域模型和业务逻辑的稳定&#xff0c;对外提供稳定的细粒度的领域服务&#xff0c;所以它处于架构的核心位置。</li><li><span style="color:#f33b45;">应用层实现面向用户操作相关的用例和流程&#xff0c;对外提供粗粒度的 API 服务</span>。它就像一个齿轮一样进行前台应用和领域层的适配&#xff0c;接收前台需求&#xff0c;随时做出响应和调整&#xff0c;尽量避免将前台需求传导到领域层。<span style="color:#86ca5e;">应用层作为配速齿轮则位于前台应用和领域层之间。</span></li></ul>
+<h1 id="%E4%BA%8C%E3%80%81%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B">二、领域驱动设计分层架构与微服务代码模型</h1> 
+<p>DDD 并没有给出标准的代码模型&#xff0c;不同的人可能会有不同理解。这里我们在使用的时候还是建议按照欧创新架构师总结的来进行适用&#xff0c;具体如下&#xff1a;</p> 
+<h2 id="%EF%BC%88%E4%B8%80%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">&#xff08;一&#xff09;代码模型总目录结构</h2> 
+<p style="text-align:center;"><img alt="" height="559" src="https://img-blog.csdnimg.cn/20200402110828756.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="500" /></p> 
+<p>根据 DDD 分层架构模型建立了标准的微服务代码模型&#xff0c;在代码模型里面&#xff0c;各代码对象各据其位、各司其职&#xff0c;共同协作完成微服务的业务逻辑。它包括用户接口层、应用层、领域层和基础层&#xff0c;分层架构各层的职责边界非常清晰&#xff0c;又能有条不紊地分层协作。</p> 
+<ul><li><span style="color:#f33b45;">用户接口层&#xff1a;面向前端提供服务适配&#xff0c;面向资源层提供资源适配。这一层聚集了接口适配相关的功能。</span></li><li><span style="color:#f33b45;">应用层职责&#xff1a;实现服务组合和编排&#xff0c;适应业务流程快速变化的需求。这一层聚集了应用服务和事件相关的功能。</span></li><li><span style="color:#f33b45;">领域层&#xff1a;实现领域的核心业务逻辑。这一层聚集了领域模型的聚合、聚合根、实体、值对象、领域服务和事件等领域对象&#xff0c;以及它们组合所形成的业务能力。</span></li><li><span style="color:#f33b45;">基础层&#xff1a;贯穿所有层&#xff0c;为各层提供基础资源服务。这一层聚集了各种底层资源相关的服务和能力。</span></li></ul>
+<p>业务逻辑从领域层、应用层到用户接口层逐层封装和协作&#xff0c;对外提供灵活的服务&#xff0c;既实现了各层的分工&#xff0c;又实现了各层的协作。</p> 
+<h3 id="1.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%80%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">1.微服务一级目录结构</h3> 
+<p style="text-align:center;"><img alt="" height="132" src="https://img-blog.csdnimg.cn/2020040211215546.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="200" /></p> 
+<p>微服务一级目录是<span style="color:#f33b45;">按照 DDD 分层架构的分层职责来定义</span>的。从下面这张图中&#xff0c;我们可以看到&#xff0c;在代码模型里分别为<span style="color:#86ca5e;">用户接口层、应用层、领域层和基础层</span>&#xff0c;建立了<span style="color:#86ca5e;"> interfaces、application、domain 和 infrastructure</span> 四个一级代码目录。</p> 
+<h3 id="2.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">2.用户接口层目录结构、职能和代码形态</h3> 
+<p><span style="color:#f33b45;">主要存放用户接口层与前端交互、展现数据相关的代码。</span>前端应用通过这一层的接口&#xff0c;向应用服务获取展现所需的数据。这一层主要用来处理用户发送的 Restful 请求&#xff0c;解析用户输入的配置文件&#xff0c;并将数据传递给 Application 层。<span style="color:#f33b45;">数据的组装、数据传输格式以及 Facade 接口等代码都会放在这一层目录里。</span></p> 
+<p>具体如下&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="132" src="https://img-blog.csdnimg.cn/20200402112803304.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="200" /></p> 
+<ul><li>Assembler&#xff1a;实现 DTO 与领域对象之间的相互转换和数据交换。一般来说 Assembler 与 DTO 总是一同出现。</li><li>Dto&#xff1a;它是数据传输的载体&#xff0c;内部不存在任何业务逻辑&#xff0c;我们可以通过 DTO 把内部的领域对象与外界隔离。</li><li>Facade&#xff1a;提供较粗粒度的调用接口&#xff0c;将用户请求委派给一个或多个应用服务进行处理。</li></ul>
+<h3 id="3.%E5%BA%94%E7%94%A8%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">3.应用层目录结构、职能和代码形态</h3> 
+<p><span style="color:#f33b45;">主要存放应用层服务组合和编排相关的代码</span>。应用服务<strong><span style="color:#f33b45;">向下基于微服务内的领域服务或外部微服务的应用服务完成服务的编排和组合</span>&#xff0c;<span style="color:#f33b45;">向上为用户接口层提供各种应用数据展现支持服务</span></strong>。<span style="color:#86ca5e;">应用服务和事件等代码会放在这一层目录里</span>。</p> 
+<p>具体如下&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="142" src="https://img-blog.csdnimg.cn/20200402113954478.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="200" /></p> 
+<ul><li>Event&#xff08;事件&#xff09;&#xff1a;这层目录主要<span style="color:#86ca5e;">存放事件相关的代码</span>。它包括<span style="color:#86ca5e;">两个子目录&#xff1a;publish 和 subscribe</span>。前者主要存放事件发布相关代码&#xff0c;后者主要存放事件订阅相关代码&#xff08;事件处理相关的核心业务逻辑在领域层实现&#xff09;。<span style="color:#f33b45;">为了实现事件的统一管理&#xff0c;建议你将微服务内所有事件的发布和订阅的处理都统一放到应用层&#xff0c;事件相关的核心业务逻辑实现放在领域层</span>。通过应用层调用领域层服务&#xff0c;来实现完整的事件发布和订阅处理流程。</li><li>Service&#xff08;应用服务&#xff09;&#xff1a;这层的服务是<span style="color:#86ca5e;">应用服务</span>。应用服务<span style="color:#f33b45;">会对多个领域服务或外部应用服务进行封装、编排和组合&#xff0c;对外提供粗粒度的服务</span>。应用服务主要实现服务组合和编排&#xff0c;是一段独立的业务逻辑。你可以将所有应用服务放在一个应用服务类里&#xff0c;也可以把一个应用服务设计为一个应用服务类&#xff0c;以防应用服务类代码量过大。</li></ul>
+<h3 id="4.%E9%A2%86%E5%9F%9F%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">4.领域层目录结构、职能和代码形态</h3> 
+<p>主要<span style="color:#f33b45;">存放领域层核心业务逻辑相关的代码</span>。领域层可以包含<span style="color:#86ca5e;">多个聚合代码包&#xff0c;它们共同实现领域模型的核心业务逻辑</span>。聚合以及聚合内的实体、方法、领域服务和事件等代码会放在这一层目录里。</p> 
+<p>具体如下&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="304" src="https://img-blog.csdnimg.cn/20200402115548640.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="200" /></p> 
+<ul><li>Aggregate&#xff08;聚合&#xff09;&#xff1a;它是<span style="color:#86ca5e;">聚合软件包的根目录</span>&#xff0c;可以<span style="color:#86ca5e;">根据实际项目的聚合名称命名&#xff0c;比如</span><strong><span style="color:#7c79e5;">权限聚合</span></strong>。在聚合内定义聚合根、实体和值对象以及领域服务之间的关系和边界。聚合内实现高内聚的业务逻辑&#xff0c;它的代码可以独立拆分为微服务。<span style="color:#86ca5e;">以聚合为单位的代码放在一个包里的主要目的是为了业务内聚&#xff0c;而更大的目的是为了以后微服务之间聚合的重组</span>。聚合之间清晰的代码边界&#xff0c;可以让你轻松地实现以聚合为单位的微服务重组&#xff0c;在微服务架构演进中有着很重要的作用。</li><li>Entity&#xff08;实体&#xff09;&#xff1a;它<span style="color:#86ca5e;">存放聚合根、实体、值对象以及工厂模式&#xff08;Factory&#xff09;相关代码</span>。实体类采用<span style="color:#f33b45;">充血模型</span>&#xff0c;同一实体相关的业务逻辑都在实体类代码中实现。<span style="color:#f33b45;">跨实体的业务逻辑代码在领域服务中实现</span>。</li><li>Event&#xff08;事件&#xff09;&#xff1a;它<span style="color:#86ca5e;">存放事件实体以及与事件活动相关的业务逻辑代码</span>。</li><li>Service&#xff08;领域服务&#xff09;&#xff1a;它<span style="color:#86ca5e;">存放领域服务代码</span>。<span style="color:#f33b45;">一个领域服务是多个实体组合出来的一段业务逻辑</span>。你可以将聚合内所有领域服务都放在一个<span style="color:#f33b45;">领域服务类</span>中&#xff0c;你也可以把每一个领域服务设计为一个类。如果领域服务内的业务逻辑相对复杂&#xff0c;建议将一个领域服务设计为一个领域服务类&#xff0c;避免由于所有领域服务代码都放在一个领域服务类中&#xff0c;而出现代码臃肿的问题。<span style="color:#f33b45;">领域服务封装多个实体或方法后向上层提供应用服务调用</span>。</li><li>Repository&#xff08;仓储&#xff09;&#xff1a;它<span style="color:#86ca5e;">存放所在聚合的查询或持久化领域对象的代码&#xff0c;通常包括仓储接口和仓储实现方法</span>。为了方便聚合的拆分和组合&#xff0c;我们设定了一个原则&#xff1a;<span style="color:#f33b45;">一个聚合对应一个仓储</span>。&#xff08;特别说明&#xff1a;按照 DDD 分层架构&#xff0c;仓储实现本应该属于基础层代码&#xff0c;但为了在微服务架构演进时&#xff0c;<span style="color:#f33b45;">保证代码拆分和重组的便利性&#xff0c;把聚合仓储实现的代码放到了聚合包内</span>。&#xff09;</li></ul>
+<h3 id="5.%E5%9F%BA%E7%A1%80%E5%B1%82%E5%B1%82%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E3%80%81%E8%81%8C%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E5%BD%A2%E6%80%81">5.基础层层目录结构、职能和代码形态</h3> 
+<p>主要<span style="color:#86ca5e;">存放基础资源服务相关的代码</span>&#xff0c;为其它各层提供的通用技术能力、三方软件包、数据库服务、配置和基础资源服务的代码都会放在这一层目录里。</p> 
+<p>具体如下&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="163" src="https://img-blog.csdnimg.cn/20200402132450118.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="200" /></p> 
+<ul><li>Config&#xff1a;主要存放配置相关代码。</li><li>Util&#xff1a;主要存放平台、开发框架、消息、数据库、缓存、文件、总线、网关、第三方类库、通用算法等基础代码&#xff0c;你可以为不同的资源类别建立不同的子目录。</li></ul>
+<h2 id="%EF%BC%88%E4%BA%8C%EF%BC%89%E5%BA%94%E7%94%A8%E5%B1%82%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90">&#xff08;二&#xff09;应用层的领域对象分析</h2> 
+<p>应用层的主要领域对象是应用服务和事件的发布以及订阅。</p> 
+<p>在事件风暴或领域故事分析时&#xff0c;我们往往会根据用户或系统发起的命令&#xff0c;来设计服务或实体方法。为了<span style="color:#f33b45;">响应这个命令&#xff0c;我们需要分析和记录&#xff1a;</span></p> 
+<ul><li>在应用层和领域层分别会发生哪些业务行为&#xff1b;</li><li>各层分别需要设计哪些服务或者方法&#xff1b;</li><li>这些方法和服务的分层以及领域类型&#xff08;比如实体方法、领域服务和应用服务等&#xff09;&#xff0c;它们之间的调用和组合的依赖关系。</li></ul>
+<p>在严格分层架构模式下&#xff0c;不允许服务的跨层调用&#xff0c;每个服务只能调用它的下一层服务。服务从下到上依次为&#xff1a;实体方法、领域服务和应用服务。建议采用服务逐层封装的方式&#xff0c;服务的封装和调用主要有以下几种方式&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="353" src="https://img-blog.csdnimg.cn/20200402133915318.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="500" /></p> 
+<h3 id="1.%E5%AE%9E%E4%BD%93%E6%96%B9%E6%B3%95%E7%9A%84%E5%B0%81%E8%A3%85">1.实体方法的封装</h3> 
+<p>实体方法是最底层的原子业务逻辑。</p> 
+<ul><li>如果<span style="color:#f33b45;">单一实体的方法需要被跨层调用&#xff0c;你可以将它封装成领域服务</span>&#xff0c;这样封装的<span style="color:#f33b45;">领域服务就可以被应用服务调用和编排</span>了。</li><li>如果它<span style="color:#f33b45;">还需要被用户接口层调用&#xff0c;需要将这个领域服务封装成应用服务</span>。</li></ul>
+<p>经过逐层服务封装&#xff0c;实体方法就可以暴露给上面不同的层&#xff0c;实现跨层调用。</p> 
+<p>封装时服务前面的名字可以保持一致&#xff0c;你<strong><span style="color:#f33b45;">可以用 *DomainService 或 *AppService 后缀来区分领域服务或应用服务</span></strong>。</p> 
+<h3 id="2.%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%BB%84%E5%90%88%E5%92%8C%E5%B0%81%E8%A3%85">2.领域服务的组合和封装</h3> 
+<p><span style="color:#f33b45;">领域服务会对多个实体和实体方法进行组合和编排</span>&#xff0c;供应用服务调用。</p> 
+<p>如果它<span style="color:#f33b45;">需要暴露给用户接口层&#xff0c;领域服务就需要封装成应用服务</span>。</p> 
+<h3 id="3.%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%BB%84%E5%90%88%E5%92%8C%E7%BC%96%E6%8E%92">3.应用服务的组合和编排</h3> 
+<p><span style="color:#f33b45;">应用服务会对多个领域服务进行组合和编排&#xff0c;暴露给用户接口层&#xff0c;供前端应用调用。</span></p> 
+<p>多个应用服务可能会对多个同样的领域服务重复进行同样业务逻辑的组合和编排。当出现这种情况时&#xff0c;就需要分析是不是领域服务可以整合了。可以将这几个不断重复组合的领域服务&#xff0c;合并到一个领域服务中实现&#xff0c;这样领域模型将会越来越精炼&#xff0c;更能适应业务的要求。</p> 
+<p>应用服务类放在应用层 Service 目录结构下。领域事件的发布和订阅类放在应用层 Event 目录结构下。</p> 
+<h2 id="%EF%BC%88%E4%B8%89%EF%BC%89%E9%A2%86%E5%9F%9F%E5%B1%82%E7%9A%84%E9%A2%86%E5%9F%9F%E5%AF%B9%E8%B1%A1%E5%88%86%E6%9E%90">&#xff08;三&#xff09;领域层的领域对象分析</h2> 
+<p><span style="color:#f33b45;">事件风暴</span>结束时&#xff0c;领域模型<span style="color:#f33b45;">聚合</span>内一般会有&#xff1a;<span style="color:#f33b45;">聚合、实体、命令和领域事件等领域对象</span>。</p> 
+<p>在完成<span style="color:#f33b45;">故事分析和微服务设计</span>后&#xff0c;微服务的<span style="color:#f33b45;">聚合</span>内一般会有&#xff1a;<span style="color:#f33b45;">聚合、聚合根、实体、值对象、领域事件、领域服务和仓储等领域对象。</span></p> 
+<h3 id="1.%E8%AE%BE%E8%AE%A1%E5%AE%9E%E4%BD%93">1.设计实体</h3> 
+<p><span style="color:#f33b45;">大多数情况下&#xff0c;领域模型的业务实体与微服务的数据库实体是一一对应的。</span></p> 
+<p><span style="color:#f33b45;">但某些领域模型的实体在微服务设计时&#xff0c;可能会被设计为多个数据实体&#xff0c;或者实体的某些属性被设计为值对象。</span></p> 
+<p>在分层架构里&#xff0c;<span style="color:#f33b45;">实体采用充血模型</span>&#xff0c;在实体类内实现实体的全部业务逻辑。这些不同的实体都有自己的方法和业务行为&#xff0c;比如地址实体有新增和修改地址的方法&#xff0c;银行账号实体有新增和修改银行账号的方法。</p> 
+<p>实体类放在领域层的 Entity 目录结构下。</p> 
+<h3 id="2.%E6%89%BE%E5%87%BA%E8%81%9A%E5%90%88%E6%A0%B9">2.找出聚合根</h3> 
+<p><span style="color:#f33b45;">聚合根来源于领域模型&#xff0c;聚合根是一种特殊的实体&#xff0c;它有自己的属性和方法</span>。<span style="color:#f33b45;">聚合根可以实现聚合之间的对象引用&#xff0c;还可以引用聚合内的所有实体。</span></p> 
+<ul><li>在个人客户聚合里&#xff0c;个人客户这个实体是聚合根&#xff0c;它负责管理地址、电话以及银行账号的生命周期。</li><li>个人客户聚合根通过工厂和仓储模式&#xff0c;实现聚合内地址、银行账号等实体和值对象数据的初始化和持久化。</li></ul>
+<p>聚合根类放在代码模型的 Entity 目录结构下。聚合根有自己的实现方法&#xff0c;比如生成客户编码&#xff0c;新增和修改客户信息等方法。</p> 
+<h3 id="3.%E8%AE%BE%E8%AE%A1%E5%80%BC%E5%AF%B9%E8%B1%A1">3.设计值对象</h3> 
+<p><span style="color:#f33b45;">根据需要将某些实体的某些属性或属性集设计为值对象</span>。值对象类放在代码模型的 Entity 目录结构下。</p> 
+<p>在个人客户聚合中&#xff0c;客户拥有客户证件类型&#xff0c;它是以枚举值的形式存在&#xff0c;所以将它设计为值对象。</p> 
+<p><span style="color:#f33b45;">有些领域对象可以设计为值对象&#xff0c;也可以设计为实体&#xff0c;我们需要根据具体情况来分析&#xff1a;</span></p> 
+<ul><li>如果这个领域对象在其它聚合内维护生命周期&#xff0c;且在它依附的实体对象中只允许整体替换&#xff0c;我们就可以将它设计为值对象。</li><li>如果这个对象是多条且需要基于它做查询统计&#xff0c;建议将它设计为实体。</li></ul>
+<h3 id="4.%E8%AE%BE%E8%AE%A1%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6">4.设计领域事件</h3> 
+<p><span style="color:#f33b45;">如果领域模型中领域事件会触发下一步的业务操作&#xff0c;我们就需要设计领域事件</span>。</p> 
+<ul><li>首先确定领域事件发生在微服务内还是微服务之间。</li><li>然后设计事件实体对象&#xff0c;事件的发布和订阅机制&#xff0c;以及事件的处理机制。</li><li>判断是否需要引入<span style="color:#f33b45;">事件总线或消息中间件</span>。</li></ul>
+<p>领域事件实体和处理类放在领域层的 Event 目录结构下。领域事件的发布和订阅类建议放在应用层的 Event 目录结构下。</p> 
+<h3 id="5.%E8%AE%BE%E8%AE%A1%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1">5.设计领域服务</h3> 
+<p><span style="color:#f33b45;">如果一个业务动作或行为跨多个实体&#xff0c;我们就需要设计领域服务。</span></p> 
+<p>领域服务<span style="color:#f33b45;">通过对多个实体和实体方法进行组合&#xff0c;完成核心业务逻辑</span>。可以认为领域服务是位于实体方法之上和应用服务之下的一层业务逻辑。</p> 
+<p><span style="color:#f33b45;">按照严格分层架构层的依赖关系</span>&#xff1a;</p> 
+<ul><li>如果实体的方法需要暴露给应用层&#xff0c;它需要封装成领域服务后才可以被应用服务调用。</li><li>如果有的实体方法需要被前端应用调用&#xff0c;我们会将它封装成领域服务&#xff0c;然后再封装为应用服务。</li></ul>
+<p>领域服务类放在领域层的 Service 目录结构下。</p> 
+<h3 id="6.%E8%AE%BE%E8%AE%A1%E4%BB%93%E5%82%A8">6.设计仓储</h3> 
+<p>每一个聚合都有一个仓储&#xff0c;仓储主要用来完成数据查询和持久化操作。</p> 
+<p>仓储包括仓储的接口和仓储实现&#xff0c;通过依赖倒置实现应用业务逻辑与数据库资源逻辑的解耦。</p> 
+<p>仓储代码放在领域层的 Repository 目录结构下。</p> 
+<h2 id="%EF%BC%88%E5%9B%9B%EF%BC%89%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9E%8B%E5%BC%BA%E8%B0%83%E5%86%85%E5%AE%B9">&#xff08;四&#xff09;代码模型强调内容</h2> 
+<h3 id="%E7%AC%AC%E4%B8%80%E7%82%B9%EF%BC%9A%E8%81%9A%E5%90%88%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BE%B9%E7%95%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E6%B8%85%E6%99%B0%E3%80%82">第一点&#xff1a;<span style="color:#f33b45;">聚合之间的代码边界一定要清晰</span>。</h3> 
+<p>聚合之间的服务调用和数据关联应该是尽可能的松耦合和低关联&#xff0c;聚合之间的服务调用应该通过上层的应用层组合实现调用&#xff0c;原则上不允许聚合之间直接调用领域服务。</p> 
+<p>这种松耦合的代码关联&#xff0c;在以后业务发展和需求变更时&#xff0c;可以很方便地实现业务功能和聚合代码的重组&#xff0c;在微服务架构演进中将会起到非常重要的作用。</p> 
+<h3 id="%E7%AC%AC%E4%BA%8C%E7%82%B9%EF%BC%9A%E4%BD%A0%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%89%E4%BB%A3%E7%A0%81%E5%88%86%E5%B1%82%E7%9A%84%E6%A6%82%E5%BF%B5%E3%80%82">第二点&#xff1a;你<span style="color:#f33b45;">一定要有代码分层的概念</span>。</h3> 
+<p>写代码时一定要搞清楚代码的职责&#xff0c;将它放在职责对应的代码目录内。</p> 
+<p>应用层代码主要完成服务组合和编排&#xff0c;以及聚合之间的协作&#xff0c;它是很薄的一层&#xff0c;不应该有核心领域逻辑代码。</p> 
+<p>领域层是业务的核心&#xff0c;领域模型的核心逻辑代码一定要在领域层实现。</p> 
+<p>如果将核心领域逻辑代码放到应用层&#xff0c;你的基于 DDD 分层架构模型的微服务慢慢就会演变成传统的三层架构模型了。</p> 
+<h1 id="%E4%B8%89%E3%80%81%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%BE%B9%E7%95%8C">三、正确理解微服务的边界</h1> 
+<p>微服务设计的重点&#xff0c;就是看微服务设计是否能够支持架构长期、轻松的演进。</p> 
+<p>在事件风暴中&#xff0c;我们会梳理出业务过程中的用户操作、事件以及外部依赖关系等&#xff0c;根据这些要素梳理出实体等领域对象。</p> 
+<ul><li><span style="color:#f33b45;">根据实体对象之间的业务关联性&#xff0c;将业务紧密相关的多个实体进行组合形成聚合&#xff0c;聚合之间是第一层边界。</span></li><li><span style="color:#f33b45;">根据业务及语义边界等因素将一个或者多个聚合划定在一个限界上下文内&#xff0c;形成领域模型&#xff0c;限界上下文之间的边界是第二层边界。</span></li></ul>
+<p>为了方便理解&#xff0c;我们将这些边界细分为&#xff1a;逻辑边界、物理边界和代码边界。</p> 
+<h2 id="%EF%BC%88%E4%B8%80%EF%BC%89%E9%80%BB%E8%BE%91%E8%BE%B9%E7%95%8C">&#xff08;一&#xff09;逻辑边界</h2> 
+<p><span style="color:#f33b45;">逻辑边界主要定义同一业务领域或应用内紧密关联的对象所组成的不同聚类的组合之间的边界</span>。</p> 
+<p><strong><span style="color:#f33b45;">微服务内聚合之间的边界就是逻辑边界</span></strong>。一般来说微服务会有一个以上的聚合&#xff0c;在开发过程中不同聚合的代码隔离在不同的聚合代码目录中。它是一个虚拟的边界&#xff0c;强调业务的内聚&#xff0c;可根据需要变成物理边界&#xff0c;也就是说聚合也可以独立为微服务。</p> 
+<p><span style="color:#86ca5e;">微服务的架构演进并不是随心所欲的&#xff0c;需要遵循一定的规则&#xff0c;这个规则就是逻辑边界</span>。微服务架构演进时&#xff0c;在业务端以聚合为单位进行业务能力的重组&#xff0c;在微服务端以聚合的代码目录为单位进行微服务代码的重组。</p> 
+<p>来看一个微服务实例&#xff0c;在下面这张图中&#xff0c;我们可以看到微服务里包含了两个聚合的业务逻辑&#xff0c;两个聚合分别内聚了各自不同的业务能力&#xff0c;聚合内的代码分别归到了不同的聚合目录下。</p> 
+<p style="text-align:center;"><img alt="" height="382" src="https://img-blog.csdnimg.cn/20200402142815855.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="500" /></p> 
+<p>那随着业务的快速发展&#xff0c;如果某一个微服务遇到了高性能挑战&#xff0c;需要将部分业务能力独立出去&#xff0c;我们就可以以聚合为单位&#xff0c;将聚合代码拆分独立为一个新的微服务&#xff0c;这样就可以很容易地实现微服务的拆分。</p> 
+<p>另外&#xff0c;我们也可以对多个微服务内有相似功能的聚合进行功能和代码重组&#xff0c;组合为新的聚合和微服务&#xff0c;独立为通用微服务&#xff0c;有点做中台的感觉&#xff01;</p> 
+<h2 id="%EF%BC%88%E4%BA%8C%EF%BC%89%E7%89%A9%E7%90%86%E8%BE%B9%E7%95%8C">&#xff08;二&#xff09;物理边界</h2> 
+<p><strong><span style="color:#f33b45;">微服务之间的边界是物理边界。</span></strong><span style="color:#f33b45;">它强调微服务部署和运行的隔离&#xff0c;关注微服务的服务调用、容错和运行等。</span></p> 
+<p><span style="color:#f33b45;">物理边界主要从部署和运行的视角来定义微服务之间的边界。</span>不同微服务部署位置和运行环境是相互物理隔离的&#xff0c;分别运行在不同的进程中。这种边界就是微服务之间的物理边界。</p> 
+<p>举例&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="156" src="https://img-blog.csdnimg.cn/20200402143041904.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="300" /></p> 
+<p>有些项目团队在将集中式单体应用拆分为微服务时&#xff0c;首先进行的往往不是建立领域模型&#xff0c;而只是按照业务功能将原来单体应用的一个软件包拆分成多个所谓的“微服务”软件包&#xff0c;而这些“微服务”内的代码仍然是集中式三层架构的模式&#xff0c;“微服务”内的代码高度耦合&#xff0c;逻辑边界不清晰&#xff0c;这里我们暂且称它为<span style="color:#86ca5e;">“小单体微服务”</span>。</p> 
+<p>而随着新需求的提出和业务的发展&#xff0c;这些小单体微服务会慢慢膨胀起来。当有一天你发现这些膨胀了的微服务&#xff0c;有一部分业务功能需要拆分出去&#xff0c;或者部分功能需要与其它微服务进行重组时&#xff0c;你会发现原来这些看似清晰的微服务&#xff0c;不知不觉已经摇身一变&#xff0c;变成了臃肿油腻的大单体了&#xff0c;而这个大单体内的代码依然是高度耦合且边界不清的。</p> 
+<p><strong><span style="color:#f33b45;">这种单体式微服务只定义了一个维度的边界&#xff0c;也就是微服务之间的物理边界&#xff0c;本质上还是单体架构模式。微服务设计时要考虑的不仅仅只有这一个边界&#xff0c;别忘了还要定义好微服务内的逻辑边界和代码边界</span></strong>&#xff0c;这样才能得到你想要的结果。</p> 
+<h2 id="%EF%BC%88%E4%B8%89%EF%BC%89%E4%BB%A3%E7%A0%81%E8%BE%B9%E7%95%8C">&#xff08;三&#xff09;代码边界</h2> 
+<p><strong><span style="color:#f33b45;">不同层或者聚合之间代码目录的边界是代码边界</span></strong>。它强调的是代码之间的隔离&#xff0c;方便架构演进时代码的重组。</p> 
+<p><span style="color:#f33b45;">代码边界主要用于微服务内的不同职能代码之间的隔离</span>。</p> 
+<p>微服务开发过程中会根据代码模型建立相应的代码目录&#xff0c;实现不同功能代码的隔离。由于领域模型与代码模型的映射关系&#xff0c;代码边界直接体现出业务边界。</p> 
+<p>代码边界可以控制代码重组的影响范围&#xff0c;避免业务和服务之间的相互影响。</p> 
+<p>微服务如果需要进行功能重组&#xff0c;只需要以聚合代码为单位进行重组就可以了。</p> 
+<h1 id="%E5%9B%9B%E3%80%81%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%90%84%E5%B1%82%E7%9A%84%E5%8D%8F%E4%BD%9C">四、正确认识服务和数据在微服务各层的协作</h1> 
+<h2 id="%EF%BC%88%E4%B8%80%EF%BC%89%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8D%8F%E4%BD%9C">&#xff08;一&#xff09;正确认识服务的协作</h2> 
+<h3 id="1.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E7%B1%BB%E5%9E%8B">1. 服务的类型</h3> 
+<p>按照分层架构设计出来的微服务&#xff0c;其内部有 Facade 服务、应用服务、领域服务和基础服务。之前都有提到&#xff0c;这里可以回忆一下&#xff01;</p> 
+<h3 id="2.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%B0%83%E7%94%A8%EF%BC%88%E4%B8%89%E7%B1%BB%E4%B8%BB%E8%A6%81%E5%9C%BA%E6%99%AF%EF%BC%89">2. 服务的调用&#xff08;三类主要场景&#xff09;</h3> 
+<p>微服务的服务调用包括三类主要场景&#xff1a;微服务内跨层服务调用&#xff0c;微服务之间服务调用和领域事件驱动。</p> 
+<p style="text-align:center;"><img alt="" height="301" src="https://img-blog.csdnimg.cn/20200402144609883.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="600" /></p> 
+<ul><li> <h3 id="%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%86%85%E8%B7%A8%E5%B1%82%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8">微服务内跨层服务调用</h3> </li></ul>
+<p><span style="color:#86ca5e;">前端应用调用发布在 API 网关上的 Facade 服务&#xff0c;Facade 定向到应用服务</span>。<strong><span style="color:#86ca5e;">应用服务作为服务组织和编排者</span></strong>&#xff0c;它的服务调用有这样两种路径&#xff1a;</p> 
+<ul><li><span style="color:#f33b45;">第一种是应用服务调用并组装领域服务</span>。此时领域服务会组装实体和实体方法&#xff0c;实现核心领域逻辑。领域服务通过仓储服务获取持久化数据对象&#xff0c;完成实体数据初始化。</li><li><span style="color:#f33b45;">第二种是应用服务直接调用仓储服务</span>。这种方式主要针对像缓存、文件等类型的基础层数据访问。这类数据主要是查询操作&#xff0c;没有太多的领域逻辑&#xff0c;不经过领域层&#xff0c;不涉及数据库持久化对象。</li></ul>
+<p> </p> 
+<ul><li> <h3 id="%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8">微服务之间的服务调用</h3> </li></ul>
+<p>微服务之间的应用服务<span style="color:#f33b45;">可以直接访问&#xff0c;也可以通过 API 网关访问</span>。</p> 
+<p>由于跨微服务操作&#xff0c;在进行数据新增和修改操作时&#xff0c;你需关注分布式事务&#xff0c;保证数据的一致性。</p> 
+<ul><li> <h3 id="%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8">领域事件驱动</h3> </li></ul>
+<p>领域事件驱动包括微服务内和微服务之间的事件。</p> 
+<ul><li><span style="color:#f33b45;">微服务内通过事件总线&#xff08;EventBus&#xff09;完成聚合之间的异步处理。</span></li><li><span style="color:#f33b45;">微服务之间通过消息中间件完成。异步化的领域事件驱动机制是一种间接的服务访问方式。</span></li></ul>
+<p>当应用服务业务逻辑处理完成后&#xff0c;如果发生领域事件&#xff0c;可调用事件发布服务&#xff0c;完成事件发布。</p> 
+<p>当接收到订阅的主题数据时&#xff0c;事件订阅服务会调用事件处理领域服务&#xff0c;完成进一步的业务操作。</p> 
+<h3 id="3.%20%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E7%BB%84%E5%90%88">3. 服务的封装与组合</h3> 
+<p>微服务的服务是<span style="color:#f33b45;">从领域层逐级向上封装、组合和暴露的</span>。基本如下图体现&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="307" src="https://img-blog.csdnimg.cn/20200402145752805.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="600" /></p> 
+<h2 id="%EF%BC%88%E4%BA%8C%EF%BC%89%E6%AD%A3%E7%A1%AE%E8%AE%A4%E8%AF%86%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8D%8F%E4%BD%9C">&#xff08;二&#xff09;正确认识服务数据的协作</h2> 
+<p>在 DDD 中有很多的数据对象&#xff0c;这些对象分布在不同的层里。它们在不同的阶段有不同的形态&#xff1a;</p> 
+<ul><li><span style="color:#f33b45;">数据持久化对象 PO</span>(Persistent Object)&#xff0c;与数据库结构一一映射&#xff0c;是数据持久化过程中的数据载体。</li><li><span style="color:#f33b45;">领域对象 DO</span>&#xff08;Domain Object&#xff09;&#xff0c;微服务运行时的实体&#xff0c;是核心业务的载体。</li><li><span style="color:#f33b45;">数据传输对象 DTO</span>&#xff08;Data Transfer Object&#xff09;&#xff0c;用于前端与应用层或者微服务之间的数据组装和传输&#xff0c;是应用之间数据传输的载体。</li><li><span style="color:#f33b45;">视图对象 VO</span>&#xff08;View Object&#xff09;&#xff0c;用于封装展示层指定页面或组件的数据。</li></ul>
+<p>微服务各层数据对象的职责和转换过程如下&#xff1a;</p> 
+<p style="text-align:center;"><img alt="" height="289" src="https://img-blog.csdnimg.cn/20200402150208124.png?x-oss-process&#61;image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW9mZW5nMTAzMzAxMTE&#61;,size_16,color_FFFFFF,t_70" width="600" /></p> 
+<h3 id="1.%E5%9F%BA%E7%A1%80%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">1.基础层数据协作</h3> 
+<p><span style="color:#3399ea;">基础层的主要对象是 PO 对象。</span></p> 
+<p>我们<span style="color:#f33b45;">需要先建立 DO 和 PO 的映射关系</span>&#xff1a;</p> 
+<ul><li>当 DO 数据需要持久化时&#xff0c;仓储服务会将 DO 转换为 PO 对象&#xff0c;完成数据库持久化操作。</li><li>当 DO 数据需要初始化时&#xff0c;仓储服务从数据库获取数据形成 PO 对象&#xff0c;并将 PO 转换为 DO&#xff0c;完成数据初始化。</li></ul>
+<p>大多数情况下 PO 和 DO 是一一对应的。但也有 DO 和 PO 多对多的情况&#xff0c;在 DO 和 PO 数据转换时&#xff0c;需要进行数据重组。</p> 
+<h3 id="2.%E9%A2%86%E5%9F%9F%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">2.领域层数据协作</h3> 
+<p><span style="color:#3399ea;">领域层的主要对象是 DO 对象。</span></p> 
+<p><span style="color:#f33b45;">DO 是实体和值对象的数据和业务行为载体&#xff0c;承载着基础的核心业务逻辑</span>。</p> 
+<p>通过 DO 和 PO 转换&#xff0c;我们可以完成数据持久化和初始化。</p> 
+<h3 id="3.%E5%BA%94%E7%94%A8%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">3.应用层数据协作</h3> 
+<p><span style="color:#3399ea;">应用层的主要对象是 DO 对象。</span></p> 
+<p><span style="color:#86ca5e;">如果需要调用其它微服务的应用服务&#xff0c;DO 会转换为 DTO</span>&#xff0c;完成跨微服务的数据组装和传输。</p> 
+<p>用户接口层先完成 DTO 到 DO 的转换&#xff0c;然后应用服务接收 DO 进行业务处理。<span style="color:#f33b45;">如果 DTO 与 DO 是一对多的关系&#xff0c;这时就需要进行 DO 数据重组</span>。</p> 
+<h3 id="4.%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3%E5%B1%82%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">4.用户接口层数据协作</h3> 
+<p><span style="color:#3399ea;">用户接口层会完成 DO 和 DTO 的互转</span>&#xff0c;完成微服务与前端应用数据交互及转换。</p> 
+<p><span style="color:#3399ea;">Facade 服务会对多个 DO 对象进行组装&#xff0c;转换为 DTO 对象</span>&#xff0c;向前端应用完成数据转换和传输。</p> 
+<h3 id="5.%E5%89%8D%E7%AB%AF%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E5%8D%8F%E4%BD%9C">5.前端应用数据协作</h3> 
+<p><span style="color:#3399ea;">前端应用主要是 VO 对象</span>。</p> 
+<p>展现层使用 VO 进行界面展示&#xff0c;通过用户接口层与应用层采用 DTO 对象进行数据交互。</p> 
+<p> </p> 
+<h2 id="%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D%E3%80%81%E6%96%87%E7%8C%AE%E5%92%8C%E8%B5%84%E6%96%99">参考书籍、文献和资料</h2> 
+<p>1.极客时间课程《DDD实战》&#xff0c;欧创新&#xff0c;2019.</p> 
+<p>2.郑天民. 微服务设计原理与架构. 北京&#xff1a;人民邮电出版社&#xff0c;2018.</p> 
+<p>3.陈超、秦金卫、张逸等. 高可用可伸缩微服务架构. 电子工业出版社. 2019.</p> 
+<p>4.Eric Evans. 领域驱动设计-软件核心复杂性应对之道。 人民邮电出版社. 2018.</p>
+                </div>
+        </div>
+    </article>
+</div>
