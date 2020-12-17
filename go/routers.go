@@ -54,7 +54,7 @@ var routes = Routes{
 		Index,
 	},
 
-	// article API
+	// Article API
 	Route{
 		"GetArticles",
 		strings.ToUpper("Get"),
@@ -63,21 +63,14 @@ var routes = Routes{
 	},
 
 	Route{
-		"GetArticleID",
+		"GetArticleByID",
 		strings.ToUpper("Get"),
 		"/article/{id}",
-		GetArticleID,
-	},
-
-	Route{
-		"GetArticleIDComments",
-		strings.ToUpper("Get"),
-		"/article/{id}/comments",
-		GetArticleIDComments,
+		GetArticleByID, 
 	},
 	
 
-	// user API
+	// User API
 	Route{
 		"PostUserRegister",
 		strings.ToUpper("Post"),
@@ -92,13 +85,24 @@ var routes = Routes{
 		PostUserLogin,
 	},
 
+	
+	// Comment API
 	Route{
-		"PostArticleIDComment",
-		strings.ToUpper("Post"),
-		"/article/{id}/comment",
-		PostArticleIDComment,
+		"GetArticleCommentsByID",
+		strings.ToUpper("Get"),
+		"/article/{id}/comments",
+		GetArticleCommentsByID,
 	},
 
+	Route{
+		"PostArticleCommentsByID",
+		strings.ToUpper("Post"),
+		"/article/{id}/comment",
+		PostArticleCommentsByID,
+	},
+
+
+	// Option API
 	Route{
 		"Options",
 		strings.ToUpper("options"),

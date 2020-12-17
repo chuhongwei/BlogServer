@@ -12,20 +12,22 @@ import (
 const jwtSecret = "serviceHW9"
 
 // 生成 token
-func GenerateToken(userName, password string) (string, error) {
+func SignToken(userName, password string) (string, error) {
+
 	nowTime := time.Now()
 	expireTime := nowTime.Add(time.Hour * time.Duration(1))
-	
+
 	claims := make(jwt.MapClaims)
 	claims["name"] = userName
 	claims["pwd"] = password
 	claims["iat"] = nowTime.Unix()
 	claims["exp"] = expireTime.Unix()
-
-    // crypto.Hash方案
-	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	//  该方法内部生成签名字符串，再用于获取完整、已签名的token
-	return tokenClaims.SignedString(jwtSecret)
+	
+	// crypto.Hash 方案
+	token := jwt.New(jwt.SigningMethodHS256)
+	token.Claims = claims
+	//  该方法内部生成签名字符串，再用于获取完整、已签名的 token
+	return token.SignedString([]byte(jwtSecret))
 }
 
 // 验证 token
@@ -52,5 +54,3 @@ func CheckToken(w http.ResponseWriter, r *http.Request) (*jwt.Token, bool) {
 
 	return token, false
 }
-
-
