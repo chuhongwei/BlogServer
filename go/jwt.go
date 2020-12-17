@@ -9,37 +9,48 @@ import (
 	"github.com/dgrijalva/jwt-go/request"
 )
 
-// SecretKey : secret key for jwt
-const SecretKey = "123qwe"
+const jwtSecret = "serviceHW9"
 
-func ValidateToken(w http.ResponseWriter, r *http.Request) (*jwt.Token, bool) {
+// 生成 token
+func SignToken(userName, password string) (string, error) {
+
+	nowTime := time.Now()
+	expireTime := nowTime.Add(time.Hour * time.Duration(1))
+
+	claims := make(jwt.MapClaims)
+	claims["name"] = userName
+	claims["pwd"] = password
+	claims["iat"] = nowTime.Unix()
+	claims["exp"] = expireTime.Unix()
+	
+	// crypto.Hash 方案
+	token := jwt.New(jwt.SigningMethodHS256)
+	token.Claims = claims
+	//  该方法内部生成签名字符串，再用于获取完整、已签名的 token
+	return token.SignedString([]byte(jwtSecret))
+}
+
+// 验证 token
+func CheckToken(w http.ResponseWriter, r *http.Request) (*jwt.Token, bool) {
+	// 用户登录请求取出 token
 	token, err := request.ParseFromRequest(r, request.AuthorizationHeaderExtractor,
 		func(token *jwt.Token) (interface{}, error) {
-			return []byte(SecretKey), nil
+			return []byte(jwtSecret), nil
 		})
+	
+	if (err == nil && token.Valid) {
+		return token, true
+	}
+	
+	w.WriteHeader(http.StatusUnauthorized)
 
 	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprint(w, "Unauthorized access to this resource")
-		return token, false
+		fmt.Fprint(w, "Authorized access to this resource iss invalid !")
 	}
 
 	if !token.Valid {
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprint(w, "token is invalid")
-		return token, false
+		fmt.Fprint(w, "Token is invalid !")
 	}
 
-	return token, true
-}
-
-func SignToken(userName string) (string, error) {
-
-	token := jwt.New(jwt.SigningMethodHS256)
-	claims := make(jwt.MapClaims)
-	claims["exp"] = time.Now().Add(time.Hour * time.Duration(1)).Unix()
-	claims["iat"] = time.Now().Unix()
-	claims["name"] = userName
-	token.Claims = claims
-	return token.SignedString([]byte(SecretKey))
+	return token, false
 }
