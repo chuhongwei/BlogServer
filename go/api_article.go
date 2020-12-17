@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/chuhongwei/BlogServer/dal/db"
+	"github.com/chuhongwei/BlogServer/source"
 )
 
 // GET /articles?page=3

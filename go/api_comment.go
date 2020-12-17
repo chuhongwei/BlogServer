@@ -8,8 +8,7 @@ import (
 	"time"
 	"encoding/json"
 
-	"github.com/chuhongwei/BlogServer/dal/db"
-	"github.com/chuhongwei/BlogServer/dal/model"
+	"github.com/chuhongwei/BlogServer/source"
 	"github.com/dgrijalva/jwt-go"
 )
 
@@ -47,7 +46,7 @@ func PostArticleCommentsByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var comment model.Comment
+	var comment db.Comment
 	// 读 body parameter，decode 为 Comment 结构
 	err := json.NewDecoder(r.Body).Decode(&comment)
 	if err != nil {

@@ -5,8 +5,7 @@ import (
 	"net/http"
 	"fmt"
 
-	"github.com/chuhongwei/BlogServer/dal/db"
-	"github.com/chuhongwei/BlogServer/dal/model"
+	"github.com/chuhongwei/BlogServer/source"
 )
 
 // POST /user/register
@@ -14,7 +13,7 @@ import (
 func PostUserRegister(w http.ResponseWriter, r *http.Request) {
 
 	db.Init()
-	var user model.User
+	var user db.User
 
 	// 读取参数，转化为 User 结构体
 	// body parameter
@@ -33,7 +32,7 @@ func PostUserRegister(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 将 user 写入数据库
-	err = db.PutUsers([]model.User{user})
+	err = db.PutUsers([]db.User{user})
 	if err != nil {
 		Response(ResponseMessage{nil,err.Error(),}, w, http.StatusBadRequest)
 		return
@@ -55,7 +54,7 @@ func PostUserRegister(w http.ResponseWriter, r *http.Request) {
 func PostUserLogin(w http.ResponseWriter, r *http.Request) {
 
 	db.Init()
-	var user model.User
+	var user db.User
 
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
