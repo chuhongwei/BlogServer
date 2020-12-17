@@ -7,22 +7,18 @@ import (
 	"os"
 	"path"
 
-	"runtime"
-
 	"github.com/chuhongwei/BlogServer/dal/model"
 	"github.com/boltdb/bolt"
 )
-
-func GetDBPATH() string {
-	ostype := runtime.GOOS
-	if ostype == "windows" {
-		pt, _ := os.Getwd()
-		return pt + "\\dal\\db\\Blog.db"
-	}
-	return path.Join(os.Getenv("GOPATH"), "src", "github.com", "chuhongwei","BlogServer", "dal", "db", "Blog.db")
+//get the database absolute path
+func DBPATH() string {
+	pt, _ := os.Getwd()
+	return  path.Join(pt ,"../Blog.db")
 }
+
+//
 func Init() {
-	db, err := bolt.Open(GetDBPATH(), 0600, nil)
+	db, err := bolt.Open(DBPATH(), 0600, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -55,7 +51,7 @@ func Init() {
 // PutArticles : put articles to article of blog.db
 //
 func PutArticles(articles []model.Article) error {
-	db, err := bolt.Open(GetDBPATH(), 0600, nil)
+	db, err := bolt.Open(DBPATH(), 0600, nil)
 	if err != nil {
 		log.Fatal(err)
 	}

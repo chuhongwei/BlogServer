@@ -4,7 +4,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"github.com/chuhongwei/BlogServer/dal/db"
+	"user/BlogServer/dal/db"
+	//"github.com/chuhongwei/BlogServer/dal/db"
 	"github.com/chuhongwei/BlogServer/dal/model"
 )
 
