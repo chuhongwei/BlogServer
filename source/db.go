@@ -6,14 +6,15 @@ import (
 	"log"
 	"os"
 	"path"
-
+	"fmt"
 	"github.com/boltdb/bolt"
 )
 
 //get the database absolute path
 func DBPATH() string {
 	pt, _ := os.Getwd()
-	return  path.Join(pt ,"../Blog.db")
+	fmt.Println(path.Join(pt ,"/source/Blog.db"))
+	return  path.Join(pt ,"/source/Blog.db")
 }
 
 //create the bucket for article and user
