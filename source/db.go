@@ -141,7 +141,6 @@ func GetArticles(id int64, page int64) []Article {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	return articles
 }
 
