@@ -122,9 +122,9 @@ func GetArticles(id int64, page int64) []Article {
 
 		} else if b != nil && id == -1 {
 			cursor := b.Cursor()
-			nPerPage := 5
+			nPerPage := 4
 			fromKey := make([]byte, 8)
-			binary.LittleEndian.PutUint64(fromKey, uint64(page-1)*(uint64)(nPerPage+1))
+			binary.LittleEndian.PutUint64(fromKey, uint64(page-1)*(uint64)(nPerPage))
 
 			for k, v := cursor.Seek(fromKey); k != nil && nPerPage > 0; k, v = cursor.Next() {
 				atc := Article{}
