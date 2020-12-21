@@ -25,11 +25,23 @@
 
 ## 使用方式
 
-
-
 1. 利用命令`go get -v  github.com/chuhongwei/BlogServer`将本项目clone到本地的go工作空间中。
 2. 切换到博客源代码存放位置，执行`go run WriteBlog.go`来调用写博客到数据库的功能，完成数据库的初始化。
 3. 切换到项目的根目录，执行`go run main.go`来运行服务端程序，等待客户端的请求。
+
+
+
+为了方便使用，可以执行以下命令启动服务端。
+
+```
+go get -v  github.com/chuhongwei/BlogServer
+cd $GOPATH/src/github.com/chuhongwei/BlogServer/source/Blogs
+go run WriteBlog.go
+cd ../..
+go run main.go
+```
+
+
 
 
 
