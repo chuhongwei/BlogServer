@@ -1,10 +1,9 @@
-language: node_js
-node_js: 
-    - '14'
+language: go
+go: 
+  - "1.15.2"
 
 install:
-  - npm install
+  - go get -v github.com/chuhongwei/BlogServer
 
 script:
-  - npm run build
-  - npm run test
+  - go run main.go
