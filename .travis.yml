@@ -6,4 +6,4 @@ install:
   - go get -v github.com/chuhongwei/BlogServer
 
 script:
-  - go run source/Blogs/WriteBlog.go
+  - go build main.go
