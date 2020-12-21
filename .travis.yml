@@ -6,4 +6,4 @@ install:
   - go get -v github.com/chuhongwei/BlogServer
 
 script:
-  - go run main.go
+  - timeout 10s go run main.go
